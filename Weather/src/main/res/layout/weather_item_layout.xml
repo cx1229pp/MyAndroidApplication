@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:text=""
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <com.cx.android.weather.view.SmartImageView
+        android:id="@+id/image_weather"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:src="@mipmap/weather_no"
+        />
+
+    <TextView
+        android:id="@+id/tv_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="40dip"
+        android:text=""
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:text=""
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:text=""
+        android:gravity="center"
+        android:textColor="@color/white"/>
+
+    <com.cx.android.weather.view.SmartImageView
+        android:id="@+id/image_weather_night"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:src="@mipmap/weather_no"
+        />
+
+    <TextView
+        android:id="@+id/tv_week_zh"
+        android:layout_width="wrap_content"
+        android:layout_height="30dip"
+        android:text=""
+        android:gravity="center"
+        android:textColor="@color/white"/>
+</LinearLayout>

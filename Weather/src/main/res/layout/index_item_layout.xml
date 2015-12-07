@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dip"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dip">
+        <TextView
+            android:id="@+id/tv_index_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="标题"
+            android:layout_marginLeft="20dip"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_index_zs"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="指数"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_index_des"
+        android:layout_width="match_parent"
+        android:layout_height="70dip"
+        android:text="描述"
+        android:gravity="left"
+        android:textColor="@color/white"
+        android:layout_marginLeft="20dip"/>
+</LinearLayout>

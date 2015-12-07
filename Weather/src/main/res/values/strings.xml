@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">我的天气</string>
+    <string name="action_settings">Settings</string>
+    <string name="cityManager">城市管理</string>
+    <string name="baiduKey">jnS1ccPEB8FFoFFu89RURUjQ</string>
+    <string name="day">日</string>
+    <string name="week1">星期一</string>
+    <string name="week2">星期二</string>
+    <string name="week3">星期三</string>
+    <string name="week4">星期四</string>
+    <string name="week5">星期五</string>
+    <string name="week6">星期六</string>
+    <string name="week7">星期天</string>
+    <string name="ErrorInfo">天气信息获取失败，请检查网络!</string>
+    <string name="HintInfoOne">您已选择过该城市,请重新选择！</string>
+    <string name="NetworkErrorInfo">您当前没有网络可用，请选择网络！</string>
+    <string name="text_addCity">添加城市</string>
+    <string name="description_backtocitymanager">返回城市管理</string>
+    <string name="hint_search_city">请输入查询城市名称</string>
+    <string name="text_gps">GPS定位</string>
+    <string name="text_location">正在定位...</string>
+    <string name="check_network">网络无法连接，请检查网络!</string>
+    <string name="text_choose_city">城市管理</string>
+</resources>

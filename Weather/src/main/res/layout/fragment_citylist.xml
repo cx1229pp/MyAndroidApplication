@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="10%"
+        android:background="@color/highlighted_text_material_light">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+            android:paddingTop="25dp"
+            android:paddingLeft="5dp"
+            android:contentDescription="@string/description_backtocitymanager"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_addCity"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="25dp"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+            />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_search_city"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent="95%"
+        app:layout_heightPercent="6%"
+        android:paddingLeft="10dp"
+        android:hint="@string/hint_search_city"
+        android:layout_below="@+id/rl_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/selector_edittext"
+        android:singleLine="true"
+        />
+
+        <RelativeLayout
+            android:id="@+id/layout_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_heightPercent="10%"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/et_search_city"
+            android:background="@drawable/bg_location">
+            <ImageView
+                android:id="@+id/iv_location"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/icon_location"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_location"
+                android:layout_gravity="left|center_vertical"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/iv_location"
+                android:gravity="left"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_gps_city"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_gps"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/switch_gps"
+                android:layout_marginRight="5dp"/>
+
+            <Switch
+                android:id="@+id/switch_gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                style="@style/mySwitchStyle"
+                android:thumbTextPadding="5dp"/>
+        </RelativeLayout>
+
+        <GridView
+            android:id="@+id/gv_hotcity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:numColumns="4"
+            app:layout_heightPercent="70%"
+            android:layout_below="@+id/layout_location"
+            android:gravity="center"
+            android:stretchMode="columnWidth"/>
+</android.support.percent.PercentRelativeLayout>
