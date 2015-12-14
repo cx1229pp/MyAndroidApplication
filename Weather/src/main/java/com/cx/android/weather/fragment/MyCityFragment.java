@@ -55,13 +55,10 @@ public class MyCityFragment extends Fragment implements View.OnClickListener{
         //获取天气背景图片
         int backgroundImageResource = getActivity().getIntent().getIntExtra(WeatherConstant.BACKGROUND_IMAGE_EXTRA,0);
         if(backgroundImageResource != 0){
-            Log.d("backgroundImageResource","0:"+backgroundImageResource);
             view.setBackgroundResource(backgroundImageResource);
         }
 
         mCityGridView = (GridView) view.findViewById(R.id.gv_choose_city);
-        ImageView mAddCityImage = (ImageView) view.findViewById(R.id.iv_add_city);
-        mAddCityImage.setOnClickListener(this);
         ImageView mEditImageView = (ImageView) view.findViewById(R.id.iv_choose_city_edit);
         mEditImageView.setOnClickListener(this);
         weatherDao = WeatherDao.getInstance(getActivity());
@@ -83,7 +80,9 @@ public class MyCityFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String cityName = list.get(position);
-                if(weatherAdapter.getDeleteImageVisible()){
+                if(WeatherConstant.MY_CITY_FRAGMENT_ADDIMAGE.equals(cityName)){
+                    mMyCityCallBack.addCity();
+                }else if(weatherAdapter.getDeleteImageVisible()){
                     weatherDao.deleteSelectCity(cityName);
                     setGridViewAdapter();
                 }else{
@@ -110,9 +109,6 @@ public class MyCityFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.iv_add_city :
-                mMyCityCallBack.addCity();
-                break;
             case R.id.iv_choose_city_edit :
                 weatherAdapter.setDeleteImageVisible();
                 break;

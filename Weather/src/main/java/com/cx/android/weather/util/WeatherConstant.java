@@ -50,6 +50,7 @@ public class WeatherConstant {
     public static final String BACKGROUND_IMAGE_EXTRA = "background_image_extra";
     public static final String TAG_SHARE_BACKGROUND = "tag_share_background";
 
+    public static final String MY_CITY_FRAGMENT_ADDIMAGE = "addImage";
     /**
      * 获取天气背景
      * @param weather

@@ -29,12 +29,14 @@ public class WeatherAdapter extends BaseAdapter {
     private List<String> mCityList;
     private boolean isDeleteImageVisible = false;
     private boolean isUpdateFromNetwork = false;
+    private boolean isAddImage = false;
     private LruCache<String,String> mLruCache;
 
     public WeatherAdapter(Context context, List<String> cityList,LruCache<String,String> lruCache) {
         this.mContext = context;
         this.mCityList = cityList;
         this.mLruCache = lruCache;
+        this.mCityList.add("addImage");
     }
 
     @Override
@@ -67,6 +69,7 @@ public class WeatherAdapter extends BaseAdapter {
             viewHandler.temperatureText = (TextView) view.findViewById(R.id.tv_choose_item_temperature);
             viewHandler.weatherText = (TextView) view.findViewById(R.id.tv_choose_item_weather);
             viewHandler.deleteImage = (ImageView) view.findViewById(R.id.iv_choose_item_delete);
+            viewHandler.addImage = (ImageView) view.findViewById(R.id.my_city_item_addButton);
 
             view.setTag(viewHandler);
         }else{
@@ -75,14 +78,28 @@ public class WeatherAdapter extends BaseAdapter {
             viewHandler.cityNameText.setText(cityName);
         }
 
+        if(WeatherConstant.MY_CITY_FRAGMENT_ADDIMAGE.equals(cityName)){
+            isAddImage = true;
+            viewHandler.cityNameText.setVisibility(View.INVISIBLE);
+            viewHandler.cityNameText.setVisibility(View.INVISIBLE);
+            viewHandler.weatherImage.setVisibility(View.INVISIBLE);
+            viewHandler.temperatureText.setVisibility(View.INVISIBLE);
+            viewHandler.weatherText.setVisibility(View.INVISIBLE);
+        }else{
+            isAddImage = false;
+            viewHandler.addImage.setVisibility(View.INVISIBLE);
+        }
+
         //设置删除图标的可见
-        if(isDeleteImageVisible){
+        if(isDeleteImageVisible && !isAddImage){
             viewHandler.deleteImage.setVisibility(View.VISIBLE);
         }else{
             viewHandler.deleteImage.setVisibility(View.INVISIBLE);
         }
 
-        updateWeather(cityName, viewHandler);
+        if(!isAddImage){
+            updateWeather(cityName, viewHandler);
+        }
 
         return view;
     }
@@ -126,6 +143,7 @@ public class WeatherAdapter extends BaseAdapter {
         TextView temperatureText;
         TextView weatherText;
         ImageView deleteImage;
+        ImageView addImage;
     }
 
     public void setDeleteImageVisible(){

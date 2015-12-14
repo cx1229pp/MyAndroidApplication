@@ -1,12 +1,11 @@
 package com.cx.android.weather.fragment;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +25,24 @@ import com.cx.android.weather.util.WeatherConstant;
 /**
  * Created by 陈雪 on 2015/11/2.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class WeatherFragment extends Fragment{
     public static final String TAG_SHARE_CITY = "tag_share_city";
     private CallBack mCallBack;
-    private TextView mCityName;
-    private TextView mUpdateTime;
+    //private TextView mCityName;
+    //private TextView mUpdateTime;
     private WeatherLaytout mWeatherLaytout;
     private IndexLayout mIndexLayout;
-    private View view;
     private LruCache<String,String> mLruCache;
-    private int backgroundImageResource;
+
+    public static WeatherFragment newInstance(String cityName){
+        Bundle args = new Bundle();
+        args.putString(TAG_SHARE_CITY,cityName);
+
+        WeatherFragment fragment = new WeatherFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,17 +61,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_weather,container,false);
-        mCityName = (TextView) view.findViewById(R.id.tv_city);
-        mCityName.setOnClickListener(this);
-        mUpdateTime = (TextView) view.findViewById(R.id.tv_updateTime);
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
+        //mCityName = (TextView) view.findViewById(R.id.tv_city);
+        //mUpdateTime = (TextView) view.findViewById(R.id.tv_updateTime);
         mWeatherLaytout = (WeatherLaytout) view.findViewById(R.id.weather_layout);
         mIndexLayout = (IndexLayout) view.findViewById(R.id.index_layout);
 
+        updateWeather(getArguments().getString(TAG_SHARE_CITY));
         return view;
     }
 
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
 
@@ -76,7 +83,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }else{
             mCallBack.chooseCity();
         }
-    }
+    }*/
 
     /**
      * 先从缓存中获取数据，如果获取不到则从网络获取
@@ -109,39 +116,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
      * @param weather 天气
      */
     private void setWeatherData(Weather weather){
-        mUpdateTime.setText(weather.getDate());
+        //mUpdateTime.setText(weather.getDate());
         mWeatherLaytout.setData(weather);
         mIndexLayout.setData(weather);
 
         Temperature temp = weather.getTemperatureList().get(0);
-        backgroundImageResource = WeatherConstant.getWeatherBG(temp.getWeather());
-        view.setBackgroundResource(backgroundImageResource);
-    }
-
-    private void disableView(){
-        mUpdateTime.setVisibility(View.GONE);
-        mWeatherLaytout.setVisibility(View.GONE);
-        mIndexLayout.setVisibility(View.GONE);
-    }
-
-    private void enableView(){
-        mUpdateTime.setVisibility(View.VISIBLE);
-        mWeatherLaytout.setVisibility(View.VISIBLE);
-        mIndexLayout.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.tv_city :
-                mCallBack.myCity(backgroundImageResource);
-                break;
-        }
+        int backgroundImageResource = WeatherConstant.getWeatherBG(temp.getWeather());
+        Log.d("HomeActivity",backgroundImageResource+"");
+        mCallBack.setHomeBackground(backgroundImageResource);
+        mCallBack.setUpdateTime(weather.getDate());
     }
 
     public interface CallBack{
-        void chooseCity();
-        void myCity(int backgroudImageResource);
+        void setHomeBackground(int backgroudImageResource);
+        void setUpdateTime(String updateTime);
     }
 
     @Override
