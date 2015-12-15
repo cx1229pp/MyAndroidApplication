@@ -60,11 +60,4 @@
         android:paddingRight="10dp"
         >
     </GridView>
-
-    <ImageView
-        android:id="@+id/iv_add_city"
-        android:src="@mipmap/ic_fun_add"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        />
 </LinearLayout>

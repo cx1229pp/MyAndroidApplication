@@ -33,6 +33,7 @@ public class WeatherFragment extends Fragment{
     private WeatherLaytout mWeatherLaytout;
     private IndexLayout mIndexLayout;
     private LruCache<String,String> mLruCache;
+    private String mCityName;
 
     public static WeatherFragment newInstance(String cityName){
         Bundle args = new Bundle();
@@ -66,24 +67,10 @@ public class WeatherFragment extends Fragment{
         //mUpdateTime = (TextView) view.findViewById(R.id.tv_updateTime);
         mWeatherLaytout = (WeatherLaytout) view.findViewById(R.id.weather_layout);
         mIndexLayout = (IndexLayout) view.findViewById(R.id.index_layout);
-
-        updateWeather(getArguments().getString(TAG_SHARE_CITY));
+        mCityName = getArguments().getString(TAG_SHARE_CITY);
+        updateWeather(mCityName);
         return view;
     }
-
-    /*@Override
-    public void onStart() {
-        super.onStart();
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        final String share_city = sharedPreferences.getString(TAG_SHARE_CITY, "");
-        if(!"".equals(share_city)) {
-            mCityName.setText(share_city);
-            updateWeather(share_city);
-        }else{
-            mCallBack.chooseCity();
-        }
-    }*/
 
     /**
      * 先从缓存中获取数据，如果获取不到则从网络获取
@@ -122,13 +109,13 @@ public class WeatherFragment extends Fragment{
 
         Temperature temp = weather.getTemperatureList().get(0);
         int backgroundImageResource = WeatherConstant.getWeatherBG(temp.getWeather());
-        Log.d("HomeActivity",backgroundImageResource+"");
-        mCallBack.setHomeBackground(backgroundImageResource);
+        Log.d("HomeActivity",backgroundImageResource+"----"+temp.getWeather());
+        mCallBack.setHomeBackground(mCityName,backgroundImageResource);
         mCallBack.setUpdateTime(weather.getDate());
     }
 
     public interface CallBack{
-        void setHomeBackground(int backgroudImageResource);
+        void setHomeBackground(String cityName,int backgroudImageResource);
         void setUpdateTime(String updateTime);
     }
 

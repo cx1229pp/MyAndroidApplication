@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.ArrayMap;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,7 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
     private List<String> cityList = null;
     private LinearLayout mHomeLayout;
     private int backgroudImageResource;
+    private ArrayMap<String,Integer> mWeatherBackgroungMap = new ArrayMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,8 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
                 public int getCount() {
                     return cityList.size();
                 }
+
+
             });
 
             mWeatherViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout){
@@ -97,6 +101,9 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
                     super.onPageSelected(position);
                     Log.d("HomeActivity",position+"");
                     mCityName.setText(cityList.get(position));
+                    if(mWeatherBackgroungMap.size() > 0){
+                        mHomeLayout.setBackgroundResource(mWeatherBackgroungMap.get(cityList.get(position)));
+                    }
                 }
             });
 
@@ -107,12 +114,6 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
                 }
             }
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //mTabLayout.removeAllTabs();
     }
 
     public void chooseCity() {
@@ -129,9 +130,8 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
     }*/
 
     @Override
-    public void setHomeBackground(int backgroudImageResource) {
-        this.backgroudImageResource = backgroudImageResource;
-        mHomeLayout.setBackgroundResource(backgroudImageResource);
+    public void setHomeBackground(String cityName,int backgroudImageResource) {
+        mWeatherBackgroungMap.put(cityName,backgroudImageResource);
     }
 
     @Override

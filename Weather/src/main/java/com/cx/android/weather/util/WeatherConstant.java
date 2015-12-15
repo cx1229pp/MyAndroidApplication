@@ -72,7 +72,7 @@ public class WeatherConstant {
             bgName = BG_YIN;
         }else if(weather.contains("多云")){
             bgName = BG_DUOYUN_DAY;
-        }else if(weather.contains("晴")){
+        }else if(weather.contains("霾")){
             bgName = BG_DUOYUN_DAY;
         }else if(weather.contains("晴")){
             bgName = BG_DUOYUN_DAY;
