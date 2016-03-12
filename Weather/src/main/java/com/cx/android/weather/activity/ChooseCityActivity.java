@@ -8,12 +8,12 @@ import android.support.v4.app.Fragment;
 
 import com.cx.android.weather.db.WeatherDao;
 import com.cx.android.weather.fragment.ChooseCityFragment;
+import com.cx.android.weather.util.WeatherConstant;
 
 /**
  * Created by 陈雪 on 2015/11/4.
  */
 public class ChooseCityActivity extends BaseActivity implements ChooseCityFragment.CallBack{
-    public static final String TAG_CHOOSE_CITY = "tag_choose_city";
 
     @Override
     protected Fragment createFragment() {
@@ -26,7 +26,7 @@ public class ChooseCityActivity extends BaseActivity implements ChooseCityFragme
         if(!weatherDao.isSelectCity(cityName)){
             weatherDao.addSelectCity("", cityName);
             Intent i = new Intent();
-            i.putExtra(TAG_CHOOSE_CITY,cityName);
+            i.putExtra(WeatherConstant.TAG_CHOOSE_CITY,cityName);
             setResult(Activity.RESULT_OK,i);
             finish();
         }

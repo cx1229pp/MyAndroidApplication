@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.cx.android.weather.fragment.MyCityFragment;
+import com.cx.android.weather.util.WeatherConstant;
 
 /**
  * Created by 陈雪 on 2015/11/12.
@@ -12,7 +13,6 @@ import com.cx.android.weather.fragment.MyCityFragment;
 public class MyCityActivity extends BaseActivity
         implements MyCityFragment.MyCityCallBack{
     private static final int REQUEST_CHOOSE_CITY = 1;
-    public static final String TAG_MYCITY_RESULT = "tag_mycity_result";
 
     @Override
     protected Fragment createFragment() {
@@ -28,7 +28,7 @@ public class MyCityActivity extends BaseActivity
     @Override
     public void setResult(String cityName) {
         Intent i = new Intent();
-        i.putExtra(TAG_MYCITY_RESULT,cityName);
+        i.putExtra(WeatherConstant.TAG_MYCITY_RESULT,cityName);
         setResult(Activity.RESULT_OK,i);
         finish();
     }

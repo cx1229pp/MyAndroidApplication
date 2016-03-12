@@ -9,6 +9,7 @@ import com.cx.android.weather.R;
 
 
 /**
+ * activity基类，用于启动fragment
  * Created by 陈雪 on 2015/9/10.
  */
 public abstract class BaseActivity extends FragmentActivity {

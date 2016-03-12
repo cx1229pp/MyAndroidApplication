@@ -2,14 +2,10 @@ package com.cx.android.weather.db;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import com.cx.android.weather.model.City;
 import com.cx.android.weather.model.County;
 import com.cx.android.weather.model.Province;

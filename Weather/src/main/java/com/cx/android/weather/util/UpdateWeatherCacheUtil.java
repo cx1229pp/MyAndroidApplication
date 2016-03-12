@@ -25,10 +25,10 @@ public class UpdateWeatherCacheUtil {
         String weatherJson = "";
         if(mLruCache.get(cityName) != null){
             weatherJson = mLruCache.get(cityName);
-            Log.d("weatherJson", "weatherJson-lrucache:" + cityName);
+            Log.i("weatherJson", "weatherJson-lrucache:" + cityName);
         }else if(mDiskLruCacheUtil.getStringDiskCache(cityName) != null){
             weatherJson = mDiskLruCacheUtil.getStringDiskCache(cityName);
-            Log.d("weatherJson","weatherJson-diskcache:"+cityName);
+            Log.i("weatherJson","weatherJson-diskcache:"+cityName);
         }
 
         return ParseWeatherJSON.praseJson(weatherJson);

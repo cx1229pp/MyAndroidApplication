@@ -51,7 +51,6 @@ public class SmartImageView extends ImageView{
                 is = diskLruCacheUtil.getDiskCache(url);
                 if(is != null){
                     bm = BitmapFactory.decodeStream(is);
-                    Log.d("WebImageTask","laod-disk");
                 }else{
                     try {
                         byte[] b = HttpUtil.requestByte(url);

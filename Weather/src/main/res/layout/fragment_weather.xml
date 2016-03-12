@@ -13,32 +13,6 @@
         android:orientation="vertical"
         >
 
-        <!--<RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/tv_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dip"
-                android:text="请选择城市"
-                android:textSize="20sp"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/tv_updateTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/tv_city"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="18dp"
-                android:text="更新时间"
-                android:textColor="@color/white"/>
-        </RelativeLayout>-->
-
         <com.cx.android.weather.layout.WeatherLaytout
             android:id="@+id/weather_layout"
             android:layout_width="match_parent"

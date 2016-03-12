@@ -27,7 +27,7 @@ public class UpdateWeatherTask extends AsyncTask<String,Integer,String> {
         }
 
         weatherJson = HttpUtil.requestString(url);
-        Log.d("weatherJson", "weatherJson-network:" + cityName);
+        Log.i("weatherJson", "weatherJson-network:" + cityName);
         return weatherJson;
     }
 
