@@ -36,7 +36,7 @@
             android:value="rBq9ft85Qc81emOryExMGi20" />
 
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".presentation.ui.activity.HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:launchMode="singleTop">
@@ -47,22 +47,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.ChooseCityActivity"
+        <activity android:name=".presentation.ui.activity.ChooseCityActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTop">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MyCityActivity"/>
+                android:value=".presentation.ui.activity.MyCityActivity"/>
         </activity>
 
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
         </service>
 
-        <activity android:name=".activity.MyCityActivity"
+        <activity android:name=".presentation.ui.activity.MyCityActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTop">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.HomeActivity"/>
+                android:value=".presentation.ui.activity.HomeActivity"/>
         </activity>
     </application>
 

@@ -3,6 +3,8 @@ package com.cx.android.weather.util;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.cx.android.weather.data.net.HttpUtil;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 

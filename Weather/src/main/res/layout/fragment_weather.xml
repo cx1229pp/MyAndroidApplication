@@ -13,18 +13,18 @@
         android:orientation="vertical"
         >
 
-        <com.cx.android.weather.layout.WeatherLaytout
+        <com.cx.android.weather.presentation.ui.layout.WeatherLaytout
             android:id="@+id/weather_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip">
-        </com.cx.android.weather.layout.WeatherLaytout>
+        </com.cx.android.weather.presentation.ui.layout.WeatherLaytout>
 
-        <com.cx.android.weather.layout.IndexLayout
+        <com.cx.android.weather.presentation.ui.layout.IndexLayout
             android:id="@+id/index_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip">
-        </com.cx.android.weather.layout.IndexLayout>
+        </com.cx.android.weather.presentation.ui.layout.IndexLayout>
     </LinearLayout>
 </ScrollView>

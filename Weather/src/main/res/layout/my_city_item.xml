@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -9,26 +9,32 @@
         android:layout_height="120dp"
         android:gravity="center"
         android:layout_gravity="top|center"
-        android:background="@drawable/shape_choose_city_item">
+        android:background="@drawable/shape_choose_city_item"
+        >
         <TextView
             android:id="@+id/tv_choose_item_cityname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="top|center"
+            android:textColor="@color/white"
+            android:visibility="gone"
             />
 
-        <com.cx.android.weather.view.SmartImageView
+        <com.cx.android.weather.presentation.view.SmartImageView
             android:id="@+id/siv_choose_item_pic"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_choose_item_temperature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone"
            />
 
         <TextView
@@ -36,8 +42,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone"
             />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/my_city_item_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.ProgressBar"
+        />
 
     <ImageView
         android:id="@+id/iv_choose_item_delete"
@@ -45,7 +61,9 @@
         android:layout_height="20dp"
         android:src="@mipmap/ic_delete"
         android:layout_gravity="top|right"
+        android:visibility="gone"
         />
+
     <ImageView
         android:id="@+id/my_city_item_addButton"
         android:layout_width="30dp"
