@@ -28,11 +28,11 @@ public abstract class BaseActivity extends FragmentActivity {
 
     private void startFragment(){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment crimFragment = fragmentManager.findFragmentById(R.id.fragment_container);
-        if(crimFragment == null){
-            crimFragment = createFragment();
+        Fragment baseFragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        if(baseFragment == null){
+            baseFragment = createFragment();
             fragmentManager.beginTransaction()
-                    .add(R.id.fragment_container,crimFragment)
+                    .add(R.id.fragment_container,baseFragment)
                     .commit();
         }
     }

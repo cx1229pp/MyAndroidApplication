@@ -3,6 +3,9 @@ package com.cx.android.weather.util;
 
 import com.cx.android.weather.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 常量工具类
  * Created by ldn on 2015/5/16.
@@ -32,8 +35,11 @@ public class WeatherConstant {
     public static final int SUNDAY = 7;
 
     //百度天气接口
-    public static final String GET_WEATHER_URL = "http://api.map.baidu.com/telematics/v3/weather?location=LOCATION&output=json&ak=AK";
-    public static final String BAIDU_KEY = "jnS1ccPEB8FFoFFu89RURUjQ";
+    private static final String GET_WEATHER_URL = "http://api.map.baidu.com/telematics/v3/weather?location=LOCATION&output=json&ak=AK";
+    private static final String BAIDU_KEY = "jnS1ccPEB8FFoFFu89RURUjQ";
+
+    //腾讯地图接口
+    private static final String TX_AREA_QUERY_URL = "http://apis.map.qq.com/ws/district/v1/search?&keyword=KEYWORD&key=UD2BZ-MZYR5-INBIZ-QFG4O-76GBE-MKBZS";
 
     //天气背景
     private static final int BG_QING_DAY = R.mipmap.bg_qing_day;
@@ -54,6 +60,9 @@ public class WeatherConstant {
     public static final String TAG_MYCITY_RESULT = "tag_mycity_result";
     public static final String TAG_CHOOSE_CITY = "tag_choose_city";
     public static final String TAG_SHARE_CITY = "tag_share_city";
+
+    //SearchCityFragment
+    public static final String SEARCHCITYFRAGMENT_CITYNAME = "searchCityFragment_cityname";
     /**
      * 获取天气背景
      * @param weather
@@ -138,5 +147,47 @@ public class WeatherConstant {
         }
 
         return weekStrId;
+    }
+
+    public static List<String> getHotCitysData(){
+        List<String> list = new ArrayList<>();
+        list.add("北京");
+        list.add("上海");
+        list.add("广州");
+        list.add("深圳");
+        list.add("重庆");
+        list.add("成都");
+        list.add("武汉");
+        list.add("南京");
+        list.add("苏州");
+        list.add("杭州");
+        list.add("三亚");
+        list.add("厦门");
+        list.add("天津");
+        list.add("沈阳");
+        list.add("郑州");
+        list.add("济南");
+        list.add("兰州");
+        list.add("西安");
+        list.add("贵阳");
+        list.add("南宁");
+        list.add("福州");
+        list.add("南昌");
+        list.add("合肥");
+        list.add("长沙");
+        list.add("香港");
+        list.add("澳门");
+        list.add("台北");
+        list.add("高雄");
+
+        return list;
+    }
+
+    public static String getTxAreaQueryUrl(String keyword){
+        return TX_AREA_QUERY_URL.replace("KEYWORD",keyword);
+    }
+
+    public static String getWeatherUrl(String location){
+        return GET_WEATHER_URL.replace("AK",BAIDU_KEY).replace("LOCATION",location);
     }
 }

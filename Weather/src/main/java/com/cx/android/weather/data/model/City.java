@@ -6,7 +6,8 @@ public class City {
 	private String cityCode;
 	private String provinceCode;
 	private int childNodes;
-	
+	private String address;
+
 	public City(int level, String name, String cityCode, String provinceCode,
 			int childNodes) {
 		this.level = level;
@@ -15,6 +16,10 @@ public class City {
 		this.provinceCode = provinceCode;
 		this.childNodes = childNodes;
 	}
+
+	public City(){
+	}
+
 	public int getLevel() {
 		return level;
 	}
@@ -44,5 +49,13 @@ public class City {
 	}
 	public void setChildNodes(int childNodes) {
 		this.childNodes = childNodes;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAddress() {
+		return address;
 	}
 }

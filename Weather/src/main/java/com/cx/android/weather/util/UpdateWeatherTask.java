@@ -20,10 +20,9 @@ public class UpdateWeatherTask extends AsyncTask<String,Integer,String> {
         String cityName = params[0];
         String weatherJson;
 
-        String url = WeatherConstant.GET_WEATHER_URL;
+        String url = "";
         try {
-            url = url.replace("LOCATION", URLEncoder.encode(cityName, "UTF-8"));
-            url = url.replace("AK",WeatherConstant.BAIDU_KEY);
+            url = WeatherConstant.getWeatherUrl(URLEncoder.encode(cityName, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

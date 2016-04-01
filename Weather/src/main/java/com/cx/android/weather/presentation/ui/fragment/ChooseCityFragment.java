@@ -5,40 +5,66 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.cx.android.weather.R;
-import java.util.ArrayList;
+import com.cx.android.weather.data.model.City;
+import com.cx.android.weather.domain.executor.MainThread;
+import com.cx.android.weather.presentation.MainThreadImpl;
+import com.cx.android.weather.presentation.presenters.SearchCityFragmentPresenter;
+import com.cx.android.weather.presentation.ui.ISearchCityFragmentView;
+import com.cx.android.weather.presentation.ui.activity.SearchCityActivity;
+import com.cx.android.weather.presentation.ui.adapter.DividerItemDecoration;
+import com.cx.android.weather.presentation.ui.adapter.SearchCityAdapter;
+import com.cx.android.weather.util.WeatherConstant;
+
 import java.util.List;
 
 /**
+ * 查询城市fragment
  * Created by 陈雪 on 2015/11/4.
  */
-public class ChooseCityFragment extends Fragment{
+public class ChooseCityFragment extends Fragment implements ISearchCityFragmentView{
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
     private TextView mLocation;
     private CallBack mCallBack;
+    private RecyclerView mCityList;
+    private SearchCityFragmentPresenter mPresenter;
+    private RelativeLayout mLocationLayout;
+    private GridView mHotCitys;
+    private SearchCityAdapter mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        //声明LocationClient类
+        //声明百度定位LocationClient类
         mLocationClient = new LocationClient(getActivity().getApplicationContext());
         mLocationClient.registerLocationListener( myListener );
         initLocation();
         mLocationClient.start();
+
+        //初始化presenter
+        mPresenter = new SearchCityFragmentPresenter(getActivity().getApplication(),this);
     }
 
     @Override
@@ -52,9 +78,34 @@ public class ChooseCityFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_citylist,container,false);
         mLocation = (TextView) view.findViewById(R.id.tv_location);
-        GridView mHotCitys = (GridView) view.findViewById(R.id.gv_hotcity);
-        final List<String> list = getHotCitysData();
-        mHotCitys.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list));
+        mLocationLayout = (RelativeLayout) view.findViewById(R.id.layout_location);
+
+        mCityList = (RecyclerView) view.findViewById(R.id.fragment_searchcity_rv_citylist);
+        initRecyclerView();
+
+        //设置城市查询输入监听
+        EditText mSearchEditText = (EditText) view.findViewById(R.id.et_search_city);
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //查询城市
+                mPresenter.searchCity(s.toString());
+            }
+        };
+        mSearchEditText.addTextChangedListener(textWatcher);
+
+        mHotCitys = (GridView) view.findViewById(R.id.gv_hotcity);
+        final List<String> list = WeatherConstant.getHotCitysData();
+        mHotCitys.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, list));
+        //设置item点击监听
         mHotCitys.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -66,15 +117,66 @@ public class ChooseCityFragment extends Fragment{
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (NavUtils.getParentActivityIntent(getActivity()) != null) {
-                    NavUtils.navigateUpFromSameTask(getActivity());
-                }
+                backParent();
             }
         });
 
         return view;
     }
 
+    /**
+     * 返回父页面
+     */
+    private void backParent(){
+        if (NavUtils.getParentActivityIntent(getActivity()) != null) {
+            NavUtils.navigateUpFromSameTask(getActivity());
+        }
+    }
+
+    /**
+     * 初始化city recyclerView
+     */
+    private void initRecyclerView(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        mCityList.setLayoutManager(linearLayoutManager);
+        mCityList.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
+        mAdapter = new SearchCityAdapter();
+        mAdapter.setmLisenter(new SearchCityAdapter.OnItemClickLisenter() {
+            @Override
+            public void onItemClick(String cityName) {
+                mCallBack.chooseCity(cityName);
+            }
+        });
+
+        mCityList.setAdapter(mAdapter);
+    }
+
+    /**
+     * 更新city recyclerView
+     * @param list
+     */
+    private void setRecycleViewAdapter(List<City> list){
+        mAdapter.setCityDataList(list);
+    }
+
+    @Override
+    public void searchCityResult(List<City> list) {
+        mCityList.setVisibility(View.VISIBLE);
+        mLocationLayout.setVisibility(View.GONE);
+        mHotCitys.setVisibility(View.GONE);
+        setRecycleViewAdapter(list);
+    }
+
+    @Override
+    public void hiddenSearchCityRecyclerView() {
+        mCityList.setVisibility(View.GONE);
+        mLocationLayout.setVisibility(View.VISIBLE);
+        mHotCitys.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 百度定位监听
+     */
     public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -94,6 +196,9 @@ public class ChooseCityFragment extends Fragment{
         }
     }
 
+    /**
+     * 百度定位初始化
+     */
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving
@@ -112,41 +217,9 @@ public class ChooseCityFragment extends Fragment{
         mLocationClient.setLocOption(option);
     }
 
-    private List<String> getHotCitysData(){
-        List<String> list = new ArrayList<>();
-        list.add("北京");
-        list.add("上海");
-        list.add("广州");
-        list.add("深圳");
-        list.add("重庆");
-        list.add("成都");
-        list.add("武汉");
-        list.add("南京");
-        list.add("苏州");
-        list.add("杭州");
-        list.add("三亚");
-        list.add("厦门");
-        list.add("天津");
-        list.add("沈阳");
-        list.add("郑州");
-        list.add("济南");
-        list.add("兰州");
-        list.add("西安");
-        list.add("贵阳");
-        list.add("南宁");
-        list.add("福州");
-        list.add("南昌");
-        list.add("合肥");
-        list.add("长沙");
-        list.add("香港");
-        list.add("澳门");
-        list.add("台北");
-        list.add("高雄");
-
-        return list;
-    }
-
+    //回调函数
     public interface CallBack{
+        //返回天气首页
         void chooseCity(String cityName);
     }
 

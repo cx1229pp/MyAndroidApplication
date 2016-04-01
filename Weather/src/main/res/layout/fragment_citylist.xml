@@ -107,4 +107,13 @@
             android:layout_below="@+id/layout_location"
             android:gravity="center"
             android:stretchMode="columnWidth"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_searchcity_rv_citylist"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layout_heightPercent="80%"
+            android:layout_below="@+id/et_search_city"
+            android:visibility="gone"/>
 </android.support.percent.PercentRelativeLayout>
