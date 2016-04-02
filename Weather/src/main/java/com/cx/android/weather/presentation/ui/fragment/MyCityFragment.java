@@ -37,6 +37,16 @@ public class MyCityFragment extends Fragment implements View.OnClickListener,IMy
     private MyCityFragmentPresenter mPresenter;
     private WeatherAdapterPresenter mWeatherAdapterPresenter;
 
+    public static MyCityFragment newInstance(int backgroundImageResource){
+        Bundle args = new Bundle();
+        args.putInt(WeatherConstant.BACKGROUND_IMAGE_EXTRA,backgroundImageResource);
+
+        MyCityFragment fragment = new MyCityFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +65,7 @@ public class MyCityFragment extends Fragment implements View.OnClickListener,IMy
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_city, container, false);
         //获取天气背景图片
-        int backgroundImageResource = getActivity().getIntent().getIntExtra(WeatherConstant.BACKGROUND_IMAGE_EXTRA,0);
+        int backgroundImageResource = getArguments().getInt(WeatherConstant.BACKGROUND_IMAGE_EXTRA);
         if(backgroundImageResource != 0){
             view.setBackgroundResource(backgroundImageResource);
         }

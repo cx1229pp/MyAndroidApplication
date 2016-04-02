@@ -65,13 +65,6 @@
                 android:value=".presentation.ui.activity.HomeActivity"/>
         </activity>
 
-        <activity android:name=".presentation.ui.activity.SearchCityActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:launchMode="singleTop">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.ui.activity.ChooseCityActivity"/>
-        </activity>
     </application>
 
 </manifest>

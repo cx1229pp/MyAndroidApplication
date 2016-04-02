@@ -61,8 +61,6 @@ public class WeatherConstant {
     public static final String TAG_CHOOSE_CITY = "tag_choose_city";
     public static final String TAG_SHARE_CITY = "tag_share_city";
 
-    //SearchCityFragment
-    public static final String SEARCHCITYFRAGMENT_CITYNAME = "searchCityFragment_cityname";
     /**
      * 获取天气背景
      * @param weather

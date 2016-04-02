@@ -7,18 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cx.android.weather.R;
+import com.cx.android.weather.data.model.Temperature;
+import com.cx.android.weather.data.model.Weather;
 import com.cx.android.weather.domain.executor.Executor;
 import com.cx.android.weather.domain.executor.MainThread;
 import com.cx.android.weather.domain.executor.impl.ThreadExecutor;
+import com.cx.android.weather.presentation.IWeatherFragmentView;
 import com.cx.android.weather.presentation.MainThreadImpl;
+import com.cx.android.weather.presentation.presenters.WeatherFragmentPresenter;
 import com.cx.android.weather.presentation.ui.layout.IndexLayout;
 import com.cx.android.weather.presentation.ui.layout.WeatherLaytout;
-import com.cx.android.weather.data.model.Temperature;
-import com.cx.android.weather.data.model.Weather;
-import com.cx.android.weather.presentation.presenters.WeatherFragmentPresenter;
 import com.cx.android.weather.util.WeatherConstant;
-import com.cx.android.weather.presentation.IWeatherFragmentView;
 
 /**
  * 城市天气fragment

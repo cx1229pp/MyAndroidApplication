@@ -69,9 +69,11 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
      * @param cityName
      */
     public void setBackgroudImageResource(String cityName){
-        if(mWeatherBackgroungMap.size() > 0){
-            backgroudImageResource = mWeatherBackgroungMap.get(cityName);
-            mHomeLayout.setBackgroundResource(backgroudImageResource);
+        if(mWeatherBackgroungMap != null && mWeatherBackgroungMap.size() > 0){
+            if(mWeatherBackgroungMap.get(cityName) != null) {
+                backgroudImageResource = mWeatherBackgroungMap.get(cityName);
+                mHomeLayout.setBackgroundResource(backgroudImageResource);
+            }
             homePresenter.savePreferences(cityName);
         }
     }
@@ -130,7 +132,7 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
 
     @Override
     public void tabLayoutAddTab() {
-        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.mipmap.btn_tab));
+        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.shape_weather_tab));
     }
 
     @Override
