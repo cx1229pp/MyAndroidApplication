@@ -1,30 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="vertical"
-    android:fadingEdge="vertical"
-    android:paddingTop="15dp"
-    >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-        <com.cx.android.weather.presentation.ui.layout.WeatherLaytout
-            android:id="@+id/weather_layout"
+    android:layout_height="match_parent">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/activity_home_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip">
-        </com.cx.android.weather.presentation.ui.layout.WeatherLaytout>
+            android:scrollbars="vertical"
+            android:fadingEdge="vertical"
+            android:paddingTop="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
 
-        <com.cx.android.weather.presentation.ui.layout.IndexLayout
-            android:id="@+id/index_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dip">
-        </com.cx.android.weather.presentation.ui.layout.IndexLayout>
-    </LinearLayout>
-</ScrollView>
+                <TextView
+                    android:id="@+id/fragment_weather_updatetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更新时间"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"/>
+
+                <com.cx.android.weather.presentation.ui.layout.WeatherLaytout
+                    android:id="@+id/weather_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip">
+                </com.cx.android.weather.presentation.ui.layout.WeatherLaytout>
+
+                <com.cx.android.weather.presentation.ui.layout.IndexLayout
+                    android:id="@+id/index_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip">
+                </com.cx.android.weather.presentation.ui.layout.IndexLayout>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>
+

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
     private TabLayout mTabLayout;
     private ViewPager mWeatherViewPager;
     private TextView mCityName;
-    private TextView mUpdateTime;
+    //private TextView mUpdateTime;
     private LinearLayout mHomeLayout;
     //当前天气背景图片Id
     private int backgroudImageResource;
@@ -52,7 +53,7 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
         mWeatherViewPager = (ViewPager) findViewById(R.id.weatherPager);
         mCityName = (TextView) findViewById(R.id.activity_home_cityName);
         mCityName.setOnClickListener(this);
-        mUpdateTime = (TextView) findViewById(R.id.activity_home_updatetime);
+        //mUpdateTime = (TextView) findViewById(R.id.activity_home_updatetime);
         homePresenter = new HomePresenter(this,this);
         homePresenter.instanceDao();
     }
@@ -151,15 +152,6 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
         if(homePresenter.getShareCity().equals(cityName)){
             setBackgroudImageResource(cityName);
         }
-    }
-
-    /**
-     * 设置更新时间回调函数
-     * @param updateTime
-     */
-    @Override
-    public void setUpdateTime(String updateTime) {
-        mUpdateTime.setText(updateTime);
     }
 
     @Override

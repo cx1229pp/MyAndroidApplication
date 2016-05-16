@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.cx.android.weather.R;
 import com.cx.android.weather.data.model.Temperature;
@@ -31,6 +33,8 @@ public class WeatherFragment extends Fragment implements IWeatherFragmentView{
     private IndexLayout mIndexLayout;
     private String mCityName;
     private WeatherFragmentPresenter weatherFragmentPresenter;
+    private SwipeRefreshLayout mRefreshLayout;
+    private TextView mUpdateTimeText;
 
     /**
      * 实例化方法
@@ -66,7 +70,18 @@ public class WeatherFragment extends Fragment implements IWeatherFragmentView{
         mWeatherLaytout = (WeatherLaytout) view.findViewById(R.id.weather_layout);
         mIndexLayout = (IndexLayout) view.findViewById(R.id.index_layout);
         mCityName = getArguments().getString(WeatherConstant.TAG_SHARE_CITY);
-        weatherFragmentPresenter.updateWeather(mCityName);
+        weatherFragmentPresenter.updateWeather(mCityName,false);
+        mUpdateTimeText = (TextView) view.findViewById(R.id.fragment_weather_updatetime);
+
+        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.activity_home_refresh);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                weatherFragmentPresenter.updateWeather(mCityName,true);
+                mRefreshLayout.setRefreshing(false);
+            }
+        });
+
         return view;
     }
 
@@ -81,7 +96,8 @@ public class WeatherFragment extends Fragment implements IWeatherFragmentView{
         Temperature temp = weather.getTemperatureList().get(0);
         int backgroundImageResource = WeatherConstant.getWeatherBG(temp.getWeather());
         mCallBack.setHomeBackground(mCityName,backgroundImageResource);
-        mCallBack.setUpdateTime(weather.getDate());
+        //mCallBack.setUpdateTime(weather.getDate());
+        mUpdateTimeText.setText(weather.getDate());
     }
 
     /**
@@ -94,12 +110,6 @@ public class WeatherFragment extends Fragment implements IWeatherFragmentView{
          * @param backgroudImageResource
          */
         void setHomeBackground(String cityName,int backgroudImageResource);
-
-        /**
-         * 设置天气更新时间
-         * @param updateTime
-         */
-        void setUpdateTime(String updateTime);
     }
 
     @Override

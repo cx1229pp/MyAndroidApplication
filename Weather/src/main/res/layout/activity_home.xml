@@ -6,35 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/activity_home_cityName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp">
-
-        <TextView
-            android:id="@+id/activity_home_cityName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="请选择城市"
-            android:textSize="20sp"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/activity_home_updatetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/activity_home_cityName"
-            android:layout_alignParentRight="true"
-            android:text="更新时间"
-            android:textColor="@color/white"/>
-    </RelativeLayout>
+        android:text="请选择城市"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_gravity="center_horizontal"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp">
@@ -44,4 +29,5 @@
         android:id="@+id/weatherPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 </LinearLayout>
