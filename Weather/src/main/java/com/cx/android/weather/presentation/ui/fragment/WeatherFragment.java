@@ -96,8 +96,7 @@ public class WeatherFragment extends Fragment implements IWeatherFragmentView{
         Temperature temp = weather.getTemperatureList().get(0);
         int backgroundImageResource = WeatherConstant.getWeatherBG(temp.getWeather());
         mCallBack.setHomeBackground(mCityName,backgroundImageResource);
-        //mCallBack.setUpdateTime(weather.getDate());
-        mUpdateTimeText.setText(weather.getDate());
+        mUpdateTimeText.setText(getString(R.string.updateTime) + weather.getDate());
     }
 
     /**

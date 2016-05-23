@@ -13,7 +13,6 @@ import com.cx.android.weather.data.model.Weather;
 import com.cx.android.weather.data.net.GetWeatherDataUtil;
 import com.cx.android.weather.data.repository.WeatherDataRepository;
 import com.cx.android.weather.data.model.ParseWeatherJSON;
-import com.cx.android.weather.util.UpdateWeatherTask;
 import com.cx.android.weather.util.WeatherConstant;
 
 import java.util.List;

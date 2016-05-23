@@ -10,9 +10,12 @@ import android.widget.TextView;
 import com.cx.android.weather.R;
 import com.cx.android.weather.data.model.Temperature;
 import com.cx.android.weather.data.model.Weather;
-import com.cx.android.weather.util.WeatherConstant;
 import com.cx.android.weather.presentation.view.SmartImageView;
+import com.cx.android.weather.util.WeatherConstant;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -107,6 +110,13 @@ public class WeatherLaytout extends LinearLayout{
 
     public void setData(Weather weather){
         Calendar calendar = Calendar.getInstance();
+        DateFormat format = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT);
+        try {
+            calendar.setTime(format.parse(weather.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         int today = calendar.get(Calendar.DAY_OF_MONTH);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         String day = context.getString(R.string.day);

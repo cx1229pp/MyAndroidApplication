@@ -53,7 +53,6 @@ public class HomeActivity extends FragmentActivity implements WeatherFragment.Ca
         mWeatherViewPager = (ViewPager) findViewById(R.id.weatherPager);
         mCityName = (TextView) findViewById(R.id.activity_home_cityName);
         mCityName.setOnClickListener(this);
-        //mUpdateTime = (TextView) findViewById(R.id.activity_home_updatetime);
         homePresenter = new HomePresenter(this,this);
         homePresenter.instanceDao();
     }

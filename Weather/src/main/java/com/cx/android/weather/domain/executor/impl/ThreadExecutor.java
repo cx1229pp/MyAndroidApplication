@@ -14,16 +14,13 @@ import java.util.concurrent.TimeUnit;
  * <p/>
  */
 public class ThreadExecutor implements Executor {
-
-    // This is a singleton
     private static volatile ThreadExecutor sThreadExecutor;
-
-    private static final int                     CORE_POOL_SIZE  = 3;
-    private static final int                     MAX_POOL_SIZE   = 5;
-    private static final int                     KEEP_ALIVE_TIME = 120;
-    private static final TimeUnit TIME_UNIT       = TimeUnit.SECONDS;
-    private static final BlockingQueue<Runnable> WORK_QUEUE      = new LinkedBlockingQueue<Runnable>();
-
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int CORE_POOL_SIZE  = CPU_COUNT + 1;
+    private static final int MAX_POOL_SIZE   = CPU_COUNT * 2 + 1;
+    private static final int KEEP_ALIVE_TIME = 60;
+    private static final TimeUnit TIME_UNIT = TimeUnit.SECONDS;
+    private static final BlockingQueue<Runnable> WORK_QUEUE = new LinkedBlockingQueue<>();
     private ThreadPoolExecutor mThreadPoolExecutor;
 
     private ThreadExecutor() {
